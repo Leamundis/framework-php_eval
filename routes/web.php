@@ -1,0 +1,23 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::resource('cats', 'CatController');
+
+Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::resource('cats', 'AdminController', ['as' => 'admin']);
+});
+
+
+Auth::routes();
+
+Route::get('/', 'CatController@index')->name('home');
